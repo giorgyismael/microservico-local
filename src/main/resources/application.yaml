@@ -3,14 +3,22 @@ server:
 spring:
   application:
     name: greeting-service
-
-greeting-service:
-  greeting: "Olá"
-  default-value: "Mundo"
-  
+  #Busca configuração na cloud
+  config:
+    import:
+    - optional:configserver:http://localhost:8888/
+  #define qual profile da configuração será utilizado
+  cloud:
+    config:
+      profile: perf
+#Habilita todos os endPoints do spring-boot-starter-actuator 
 management:
   endpoints:
     web:
       exposure:
         include:
         - '*'
+#Configuração Local do aplicativo
+#greeting-service:
+  #greeting: "Olá"
+  #default-value: "Mundo"
